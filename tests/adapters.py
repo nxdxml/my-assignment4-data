@@ -8,6 +8,8 @@ from cs336_data.identify_language import identify_language
 from cs336_data.mask_pii import mask_emails, mask_ips, mask_phone_numbers
 from cs336_data.classify_sth import classify_nsfw, classify_quality, classify_toxic_speech
 from cs336_data.gopher_quality_filters import gopher_quality_filters
+from cs336_data.deduplication import exact_line_deduplication, minhash_deduplication
+
 # done
 def run_extract_text_from_html_bytes(html_bytes: bytes) -> str | None:
     return extract_text_from_html_bytes(html_bytes=html_bytes)
@@ -36,7 +38,7 @@ def run_classify_nsfw(text: str) -> tuple[Any, float]:
 def run_classify_toxic_speech(text: str) -> tuple[Any, float]:
     return classify_toxic_speech(text)
 
-
+# done
 def run_classify_quality(text: str) -> tuple[Any, float]:
     return classify_quality(text)
 
@@ -44,11 +46,11 @@ def run_classify_quality(text: str) -> tuple[Any, float]:
 def run_gopher_quality_filter(text: str) -> bool:
     return gopher_quality_filters(text)
 
-
+# done
 def run_exact_line_deduplication(
     input_files: list[os.PathLike], output_directory: os.PathLike
 ):
-    raise NotImplementedError
+    return exact_line_deduplication(input_files=input_files,output_directory=output_directory)
 
 
 def run_minhash_deduplication(
@@ -59,4 +61,9 @@ def run_minhash_deduplication(
     jaccard_threshold: float,
     output_directory: os.PathLike,
 ):
-    raise NotImplementedError
+    return minhash_deduplication(input_files=input_files,
+                                 num_hashes=num_hashes,
+                                 num_bands=num_bands,
+                                 ngrams=ngrams,
+                                 jaccard_threshold=jaccard_threshold,
+                                 output_directory=output_directory)
